@@ -8,9 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(
-    "mongodb://aryangaur369_db_user:v9U8CU%2EcRLJqQhg@ac-nekbcay-shard-00-00.sfmahkq.mongodb.net:27017,ac-nekbcay-shard-00-01.sfmahkq.mongodb.net:27017,ac-nekbcay-shard-00-02.sfmahkq.mongodb.net:27017/portfolioDB?ssl=true&replicaSet=atlas-yiupbq-shard-0&authSource=admin&retryWrites=true&w=majority",
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
@@ -86,6 +84,5 @@ app.get("/", (req, res) => {
   res.send("Portfolio API is running 🚀");
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log("Server running"));
